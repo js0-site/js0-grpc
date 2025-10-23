@@ -1,0 +1,10 @@
+syntax = "proto3";
+package test;
+
+message Test0 {
+  int64 abc = 1;
+  oneof notice_way {
+    string email = 2;
+    string phone = 3;
+  }
+}

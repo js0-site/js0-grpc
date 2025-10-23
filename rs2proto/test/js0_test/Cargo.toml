@@ -1,0 +1,8 @@
+[package]
+name = "js0_test"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aok = "0.1.17"
+use_rename_test = { path = "../use_rename_test" }

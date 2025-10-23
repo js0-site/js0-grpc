@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package js0_grpc;
+
+enum Status {
+  ok = 0;
+  internal_err = -1;
+  captcha = -2;
+  stream_end = -3;
+}
+
+// call li
+
+message ResponseLi {
+  repeated uint64 id_li = 1;
+  repeated int32 status_li = 2;
+  repeated bytes data_li = 3;
+}
+
+message CallLi {
+  repeated uint64 id_li = 1;
+  repeated uint64 func_id_li = 2;
+  repeated bytes args_li = 3;
+  optional bytes token = 4;
+  optional bytes captcha = 5;
+}
+
+// stream respose
+message StreamResponseCall {
+  uint64 func_id = 1;
+  bytes args = 2;
+}
+
+enum StreamResponseCallStatus {
+  ok = 0;
+}
+
+message StreamResponseCallResponse {
+  int32 status = 1;
+  bytes data = 2;
+}
+
+message Request {
+  oneof kind {
+    CallLi call_li = 1;
+    StreamResponseCall stream_response_call = 2;
+  }
+}

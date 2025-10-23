@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package api;
+
+message Void {}
+
+message Version {
+  uint32 major = 1;
+  uint32 minor = 2;
+  uint32 patch = 3;
+}
+
+
+message UpdateFile {
+  string txt = 1;
+  bytes src_hash = 2;
+  string path = 3;
+}
+
+message Update
+{
+  uint32 from_lang = 1;
+  uint32 to_lang = 2;
+  repeated UpdateFile li = 3;
+}
+
+message Tran
+{
+  uint32 from_lang = 1;
+  repeated uint32 to_lang_li = 2;
+  string txt = 3;
+  string path = 4;
+}
+
+message Job
+{
+  repeated Update update_li = 1;
+  repeated Tran tran_li = 2;
+}
+
+message Traned
+{
+  uint32 from_lang = 1;
+  uint32 to_lang = 2;
+  string txt = 3;
+  bytes src_hash = 4;
+  string path = 5;
+}
+
+message ErrUnsupportExt {
+  uint32 from_lang = 1;
+  string path = 2;
+}
+
+message ErrParse {
+  uint32 from_lang = 1;
+  string path = 2;
+  string msg = 3;
+}
+
+// 欠费
+message ErrOverdraw {
+  uint64 debt = 1;
+  uint32 currency = 2;
+}
+
+message ErrTokenInvalid {}
+
+message ErrTran {
+  uint32 from_lang = 1;
+  uint32 to_lang = 2;
+  string path = 3;
+  string msg = 4;
+}
+
+enum ErrUpdateKind {
+  LenMismatch = 0;
+  HashMiss = 1;
+}
+
+message ErrUpdate {
+  ErrUpdateKind kind = 1;
+  uint32 from_lang = 2;
+  uint32 to_lang = 3;
+  string path = 4;
+}
+
+message ErrUpdateHashMiss {}
+
+message TranResult {
+  oneof kind {
+    Traned traned = 1;
+    ErrTran err_tran = 2;
+    ErrTokenInvalid err_token_invalid = 3;
+    ErrOverdraw err_overdraw = 4;
+    ErrUnsupportExt err_unsupport_ext = 5;
+    ErrParse err_parse = 6;
+    ErrUpdate err_update = 7;
+  };
+}
