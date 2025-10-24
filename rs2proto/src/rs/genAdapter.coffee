@@ -140,7 +140,7 @@ inner: r.into_iter().map(|r| #{type} {
 
 
       call = """
-let r = #{call};\n  #{if is_result then 'Ok(' else ''}#{output_type} {
+let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' else ''}#{output_type} {
     #{inner}
   }#{if is_result then ')' else ''}"""
   else
@@ -153,6 +153,6 @@ let r = #{call};\n  #{if is_result then 'Ok(' else ''}#{output_type} {
 
 
   return """
-pub #{if is_async then 'async ' else ''}fn #{func_name}(#{func_args}) -> #{if is_result then 'xrpc::Result<' else ''}#{output_type or EMPTY}#{ if is_result then '>' else '' } {
+pub #{if is_async then 'async ' else ''}fn #{func_name}(#{func_args}) -> #{if is_result then 'aok::Result<' else ''}#{output_type or EMPTY}#{ if is_result then '>' else '' } {
   #{call}.into()
 }"""
