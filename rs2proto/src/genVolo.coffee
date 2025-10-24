@@ -46,6 +46,7 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
   http '      res.dump('+funcCall('req')+')\n'
 
   adapter genAdapter(
+    FuncName
     func_name
     args_type
     mod
