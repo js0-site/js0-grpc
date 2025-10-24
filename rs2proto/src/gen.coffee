@@ -48,17 +48,13 @@ export default (cargo_dir)=>
     func_li
   )
 
-  proto += '''
-message Response {
-  repeated uint64 id_li_pos_state_li = 1;
-  repeated bytes data_li = 2;
-}
-  '''
   proto_fp = join(dir_gen, 'api.proto')
+
   write(
     proto_fp
     proto
   )
+
   genJs(name, dir_gen, proto_fp, func_id_map)
   genVolo(name, func_li, dir_gen, func_id_map)
   return
