@@ -65,7 +65,14 @@ export default (
         arg = '&'+arg
       args.push(arg)
 
-  call = "#{mod}::#{mod_func}(#{args.join(', ')})#{if is_async then '.await' else ''}"
+  if is_async
+    call_return = 'impl Future<Output=T>'
+    _await = '.await'
+  else
+    _await = 'await'
+    call_return = 'T;'
+
+  call = "#{mod}::#{mod_func}(#{args.join(', ')})#{_await}"
 
   if output and return_type
     [
@@ -147,11 +154,6 @@ let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' 
   else
     call += ';\n  Default::default()'
 
-  if is_async
-    call_return = 'impl Future<Output=T>'
-  else
-    call_return = 'T;'
-
   return """
 pub struct #{FuncName};
 
@@ -165,7 +167,7 @@ impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
   type Result = #{output_type or EMPTY};
   fn name() -> &'static str { "#{func_name}" }
   fn inner<T: Into<Result<Self::Result>>>(args: &Self::Args) -> #{call_return}{
-    #{func_name}(&args)
+    #{func_name}(&args)#{_await}
   }
 }
 """
