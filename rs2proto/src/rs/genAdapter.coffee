@@ -157,7 +157,7 @@ pub struct #{FuncName};
 
 impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
   type Args = #{func_args};
-  type Output = #{output_type};
+  type Result = #{output_type};
 }
 """
 
