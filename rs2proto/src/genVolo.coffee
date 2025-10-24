@@ -41,14 +41,7 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
   } = meta.header
 
   funcCall = (reqArg)=>
-    """
-\npub struct #{FuncName};
-
-impl rpc_adapter::Call for #{FuncName} {
-  type Args = #{if has_req then reqArg else ()};
-  type Result = ;
-}
-()#{if is_async then '.await' else ''}"""
+    """adapter::#{func_name}(#{if has_req then reqArg else ''})#{if is_async then '.await' else ''}"""
 
   http '      res.dump('+funcCall('req')+')\n'
 
