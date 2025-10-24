@@ -80,7 +80,7 @@ bindPush = (i)=>i.push.bind(i)
 
   grpc = ["""
 pub mod adapter;
-// pub mod http;
+pub mod http;
 use volo_grpc::{Response, Status};
 use rpc_adapter::IntoResponse;
 
@@ -91,11 +91,13 @@ impl volo_gen::#{mod}::Api for S {\n
 
   http = [
     '''
+use bytes::Bytes;
+use http_grpc::Res;
+
 use crate::adapter;
-use aok::Result;
 
-pub async fn run(func_id: u32, args: &[u8]) -> aok::Result<Vec<u8>> {
-
+pub async fn run(call_id: u64, func_id: u32, args: &[u8]) -> Bytes {
+  let res = Res { id: call_id };
   match func_id {
     '''
   ]
@@ -109,10 +111,16 @@ pub async fn run(func_id: u32, args: &[u8]) -> aok::Result<Vec<u8>> {
   )
 
   func_li.map(gen)
-  http.push '\n  }'
+  http.push '''
+    _ => {
+      log::warn!("unkown func_id {func_id}");
+      Default::default()
+    }
+  }
+}
+'''
 
-  for i from [http, grpc]
-    i.push '\n\n}'
+  grpc.push '\n\n}'
 
   for [name, code] from [
     ['lib', grpc]
