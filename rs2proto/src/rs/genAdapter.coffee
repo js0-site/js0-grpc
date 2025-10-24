@@ -147,17 +147,12 @@ let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' 
   else
     call += ';\n  Default::default()'
 
-  if args_type != EMPTY
-    func_args = "args: #{args_type}"
-  else
-    func_args = ''
-
   return """
 pub struct #{FuncName};
 
 impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
-  type Args = #{func_args};
-  type Result = #{output_type};
+  type Args = #{args_type};
+  type Result = #{output_type or EMPTY};
 }
 """
 
