@@ -141,9 +141,9 @@ inner: r.into_iter().map(|r| #{type} {
 
 
       call = """
-let r = #{call}#{ if is_result then '?' else '' };\n    #{if is_result then 'Ok(' else ''}#{output_type} {
-      #{inner}
-    }#{if is_result then ')' else ''}"""
+let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' else ''}#{output_type} {
+    #{inner}
+  }#{if is_result then ')' else ''}"""
   else
     call += ';\n  Default::default()'
 
@@ -157,7 +157,7 @@ pub struct #{FuncName};
 
 pub #{if is_async then 'async ' else ''}fn #{func_name}(args: &#{args_type}) -> #{if is_result then 'aok::Result<' else ''}#{output_type or EMPTY}#{
 if is_result then '>' else '' } {
-   #{call}
+  #{call}
 }
 
 impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
