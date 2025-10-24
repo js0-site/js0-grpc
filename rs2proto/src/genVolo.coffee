@@ -78,7 +78,9 @@ bindPush = (i)=>i.push.bind(i)
 
 < (mod, func_li, dir_gen, func_id_map) =>
 
-  adapter = []
+  adapter = [
+    "use xrpc::Result;\n\n"
+  ]
 
   grpc = ["""
 pub mod adapter;

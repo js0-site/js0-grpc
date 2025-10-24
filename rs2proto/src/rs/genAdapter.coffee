@@ -150,7 +150,6 @@ let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' 
 
 
   return """
-
 pub #{if is_async then 'async ' else ''}fn #{func_name}(args: &#{args_type}) -> #{if is_result then 'aok::Result<' else ''}#{output_type or EMPTY}#{ if is_result then '>' else '' } {
    #{call}.into()
 }
