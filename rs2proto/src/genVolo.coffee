@@ -42,7 +42,7 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
   funcCall = (reqArg)=>
     "adapter::#{func_name}(#{if has_req then reqArg else ''})#{if is_async then '.await' else ''}"
 
-  http '      '+funcCall('req')+'\n'
+  http '      res.dump('+funcCall('req')+')\n'
 
   adapter genAdapter(
     func_name
