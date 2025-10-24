@@ -48,6 +48,12 @@ export default (cargo_dir)=>
     func_li
   )
 
+  proto += '''
+message Response {
+  repeated u64 id_li_pos_state_li = 1;
+  repeated bytes data_li = 2;
+}
+  '''
   proto_fp = join(dir_gen, 'api.proto')
   write(
     proto_fp
