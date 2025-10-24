@@ -83,7 +83,7 @@ bindPush = (i)=>i.push.bind(i)
 pub mod adapter;
 pub mod http;
 use volo_grpc::{Response, Status};
-use rpc_adapter::IntoResponse;
+use xrpc::IntoResponse;
 
 pub struct S;
 
