@@ -70,7 +70,7 @@ export default (
     _await = '.await'
   else
     _await = ''
-    call_return = 'T;'
+    call_return = 'T'
 
   call = "#{mod}::#{mod_func}(#{args.join(', ')})#{_await}"
 
@@ -166,7 +166,7 @@ impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
   type Args = #{args_type};
   type Result = #{output_type or EMPTY};
   fn name() -> &'static str { "#{func_name}" }
-  fn inner<T: Into<Result<Self::Result>>>(args: &Self::Args) -> #{call_return}{
+  fn inner<T: Into<Result<Self::Result>>>(args: &Self::Args) -> #{call_return} {
     #{func_name}(&args)#{_await}
   }
 }
