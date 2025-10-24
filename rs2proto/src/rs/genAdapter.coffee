@@ -69,7 +69,7 @@ export default (
     call_return = 'impl Future<Output=T>'
     _await = '.await'
   else
-    _await = 'await'
+    _await = ''
     call_return = 'T;'
 
   call = "#{mod}::#{mod_func}(#{args.join(', ')})#{_await}"
