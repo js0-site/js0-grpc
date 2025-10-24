@@ -153,7 +153,6 @@ pub struct #{FuncName};
 impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
   type Args = #{args_type};
   type Result = #{output_type or EMPTY};
-
   fn name() -> &'static str { "#{func_name}" }
 }
 """
