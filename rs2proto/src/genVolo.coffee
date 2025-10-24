@@ -26,8 +26,9 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
 
   mod_func = func_name_li.join("::")
 
+  FuncName = Camel func_name
   if inputs.length
-    args_type = "volo_gen::#{mod}::#{Camel func_name}Args"
+    args_type = "volo_gen::#{mod}::#{FuncName}Args"
     has_req = 1
   else
     args_type = EMPTY
@@ -40,7 +41,14 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
   } = meta.header
 
   funcCall = (reqArg)=>
-    "adapter::#{func_name}(#{if has_req then reqArg else ''})#{if is_async then '.await' else ''}"
+    """
+\npub struct #{FuncName};
+
+impl rpc_adapter::Call for #{FuncName} {
+  type Args = #{if has_req then reqArg else ()};
+  type Result = ;
+}
+()#{if is_async then '.await' else ''}"""
 
   http '      res.dump('+funcCall('req')+')\n'
 
