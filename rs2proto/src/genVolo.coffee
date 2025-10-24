@@ -29,7 +29,6 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
   FuncName = Camel func_name
   if inputs.length
     args_type = "volo_gen::#{mod}::#{FuncName}Args"
-    has_req = 1
   else
     args_type = EMPTY
 
@@ -41,7 +40,7 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
   } = meta.header
 
   funcCall = (reqArg)=>
-    """adapter::#{func_name}(#{if has_req then reqArg else ''})#{if is_async then '.await' else ''}"""
+    """adapter::#{FuncName}(&req)#{if is_async then '.await' else ''}"""
 
   http '      res.dump('+funcCall('req')+')\n'
 
@@ -62,7 +61,7 @@ genFunc = (mod, func_id_map, adapter, grpc, http)=>([func_name_li, meta, root, r
     """
 \n  async fn #{func_name}(
       &self,
-      #{if has_req then 'req' else '_'}: volo_grpc::Request<#{args_type}>,
+      req: volo_grpc::Request<#{args_type}>,
     ) -> Result<
       Response<#{output_type}>,
       Status
@@ -86,8 +85,7 @@ bindPush = (i)=>i.push.bind(i)
 pub mod adapter;
 // pub mod http;
 use volo_grpc::{Response, Status};
-use xrpc::IntoResponse;
-
+use xrpc::{IntoResponse,Call,AsyncCall};
 pub struct S;
 
 impl volo_gen::#{mod}::Api for S {\n
