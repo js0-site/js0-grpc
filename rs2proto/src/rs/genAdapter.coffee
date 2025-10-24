@@ -160,7 +160,7 @@ impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
   type Args = #{args_type};
   type Result = #{output_type or EMPTY};
   fn name() -> &'static str { "#{func_name}" }
-  fn call(prefix: impl Into<String>, args: &Self::Args) -> Result<Self::Result> {
+  fn inner(args: &Self::Args) -> Result<Self::Result> {
     #{func_name}(args).into()
   }
 }
