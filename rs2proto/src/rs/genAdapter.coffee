@@ -147,21 +147,20 @@ let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' 
   else
     call += ';\n  Default::default()'
 
-
+  if is_async
+    call_return = 'T;'
+  else
+    call_return = 'impl Future<Output = T>'
 
   return """
-pub #{if is_async then 'async ' else ''}fn #{func_name}(args: &#{args_type}) -> #{if is_result then 'aok::Result<' else ''}#{output_type or EMPTY}#{ if is_result then '>' else '' } {
-   #{call}.into()
-}
-
 pub struct #{FuncName};
 
 impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
   type Args = #{args_type};
   type Result = #{output_type or EMPTY};
   fn name() -> &'static str { "#{func_name}" }
-  fn inner(args: &Self::Args) -> Result<Self::Result> {
-    #{func_name}(args).into()
+  fn inner<T: Into<Result<Self::Result>>>(args: &Self::Args) -> #{call_return}{
+    #{call}.into()
   }
 }
 """
