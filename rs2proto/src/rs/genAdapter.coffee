@@ -142,8 +142,8 @@ inner: r.into_iter().map(|r| #{type} {
 
       call = """
 let r = #{call}#{ if is_result then '?' else '' };\n    #{if is_result then 'Ok(' else ''}#{output_type} {
-    #{inner}
-  }#{if is_result then ')' else ''}"""
+      #{inner}
+    }#{if is_result then ')' else ''}"""
   else
     call += ';\n  Default::default()'
 
