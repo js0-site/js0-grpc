@@ -148,9 +148,9 @@ let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' 
     call += ';\n  Default::default()'
 
   if is_async
-    call_return = 'T;'
-  else
     call_return = 'impl Future<Output=T>'
+  else
+    call_return = 'T;'
 
   return """
 pub struct #{FuncName};
