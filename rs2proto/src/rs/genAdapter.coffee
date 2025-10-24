@@ -154,6 +154,11 @@ let r = #{call}#{ if is_result then '?' else '' };\n  #{if is_result then 'Ok(' 
 
   return """
 pub struct #{FuncName};
+
+impl xrpc::#{if is_async then 'Async' else ''}Call for #{FuncName} {
+  type Args = #{args_type};
+  type Output = #{output_type};
+}
 """
 
 #   return """
