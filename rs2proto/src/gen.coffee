@@ -50,7 +50,7 @@ export default (cargo_dir)=>
 
   proto += '''
 message Response {
-  repeated u64 id_li_pos_state_li = 1;
+  repeated uint64 id_li_pos_state_li = 1;
   repeated bytes data_li = 2;
 }
   '''
