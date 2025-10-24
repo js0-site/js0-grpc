@@ -85,7 +85,7 @@ bindPush = (i)=>i.push.bind(i)
 pub mod adapter;
 // pub mod http;
 use volo_grpc::{Response, Status};
-use xrpc::{IntoResponse,Call,AsyncCall};
+use xrpc::{AsyncCall, Call, IntoResponse};
 pub struct S;
 
 impl volo_gen::#{mod}::Api for S {\n
