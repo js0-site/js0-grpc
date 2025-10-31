@@ -1,0 +1,36 @@
+{
+  "name": "js0.site",
+  "version": "0.1.2",
+  "keywords": [
+    "grpc",
+    "grpc-web",
+    "protobuf",
+    "fetch",
+    "rpc"
+  ],
+  "description": "Maps gRPC services to native JavaScript async functions. 将 gRPC 服务映射为原生 JS 异步函数。",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/js0/js0-grpc.git"
+  },
+  "homepage": "https://github.com/js0/js0-grpc",
+  "author": "jssite@googlegroups.com",
+  "license": "MulanPSL-2.0",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "files": [
+    "./*"
+  ],
+  "devDependencies": {
+    "@3-/rolldown": "^0.1.17",
+    "@bokuweb/zstd-wasm": "^0.0.27",
+    "cli-table3": "^0.6.5",
+    "oxc-minify": "^0.95.0",
+    "protobufjs": "^7.5.4"
+  },
+  "scripts": {},
+  "type": "module",
+  "dependencies": {},
+  "bin": {}
+}
