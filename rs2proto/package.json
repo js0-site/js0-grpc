@@ -1,0 +1,35 @@
+{
+  "name": "@js0.site/rs2proto",
+  "version": "0.1.25",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/js0/js0-grpc.git"
+  },
+  "homepage": "https://github.com/js0/js0-grpc/tree/dev",
+  "author": "jssite@googlegroups.com",
+  "license": "MulanPSL-2.0",
+  "exports": {
+    ".": "./lib/lib.js",
+    "./*": "./lib/*"
+  },
+  "files": [
+    "lib/*"
+  ],
+  "bin": {
+    "rs2proto": "./cli.js"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "type": "module",
+  "dependencies": {
+    "@3-/camel": "^0.1.1",
+    "@3-/read": "^0.1.4",
+    "@3-/snake": "^0.0.3",
+    "@3-/utf8": "^0.0.4",
+    "@3-/write": "^0.0.2",
+    "@3-/yml": "^0.1.12",
+    "@3-/zx": "^0.1.15",
+    "@js0.site/proto2js": "^0.1.21",
+    "yargs": "^18.0.0"
+  }
+}
