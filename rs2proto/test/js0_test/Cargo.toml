@@ -1,0 +1,12 @@
+[package]
+name = "js0_test"
+edition = "2024"
+version = "0.1.0"
+description = "HTTP-gRPC remote call solution. / HTTP-gRPC 远程调用方案。"
+keywords = ["grpc", "http", "protobuf", "rpc", "codegen"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aok = "0.1.17"
+use_rename_test = { path = "../use_rename_test" }

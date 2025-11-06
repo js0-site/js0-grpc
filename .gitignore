@@ -1,0 +1,4 @@
+bun.lock
+lib/
+target/
+node_modules/

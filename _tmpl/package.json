@@ -1,0 +1,25 @@
+{
+	"name": "@js0.site/_tmpl",
+	"version": "0.1.0",
+  "description": "",
+  "keywords":[],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/js0/js0-grpc.git"
+	},
+	"homepage": "https://github.com/js0/js0-grpc",
+	"author": "jssite@googlegroups.com",
+	"license": "MulanPSL-2.0",
+	"exports": {
+		".": "./lib.js",
+		"./*": "./*"
+	},
+	"files": [
+		"*"
+	],
+	"devDependencies": {},
+	"scripts": {},
+	"type": "module",
+	"dependencies": {},
+	"bin": {}
+}
